@@ -72,42 +72,4 @@ app.listen(port, () => {
 📡 Example: http://localhost:${port}/api/gogo-abde?text=مرحبا
 `);
 });
-EOF      return res.status(400).json({
-        status: false,
-        error: 'اكتب ?text='
-      });
-    }
-
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4.1-mini',
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: text }
-      ],
-      temperature: 0.9,
-      max_tokens: 200
-    });
-
-    res.json({
-      status: true,
-      route: '/api/gogo-abde',
-      input: text,
-      reply: completion.choices[0].message.content
-    });
-
-  } catch (err) {
-    res.status(500).json({
-      status: false,
-      error: err.message
-    });
-  }
-});
-
-app.listen(port, () => {
-  console.log(`
-🐉 Gogo API Running
-🌐 http://localhost:${port}
-📡 Example: http://localhost:${port}/api/gogo-abde?text=مرحبا
-`);
-});
 EOF
