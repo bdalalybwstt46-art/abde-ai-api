@@ -11,7 +11,7 @@ app.use(express.json());
 
 // 🔑 استعمل المفتاح الجديد مباشرة
 const openai = new OpenAI({
-  apiKey: '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'
+  apiKey: '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'
 });
 
 // 🥋 شخصية غوغو (مُحدثة)
