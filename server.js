@@ -12,6 +12,7 @@ app.use(express.json());
 // 🔑 استعمل المفتاح الجديد مباشرة
 const Deepseek = new Deepseek({
   apiKey: 'sk-6f2de7ff561f4859892830bf3139cd90'
+  const API_URL = 'https://api.deepseek.com/v1/chat/completions';
 });
 
 // 🥋 شخصية غوغو (مُحدثة)
