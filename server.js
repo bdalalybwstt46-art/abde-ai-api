@@ -1,4 +1,3 @@
-cat > server.js << 'EOF'
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
@@ -68,4 +67,3 @@ app.listen(port, () => {
 📡 Example: http://localhost:${port}/api/gogo-abde?text=مرحبا
   `);
 });
-EOF
