@@ -8,19 +8,20 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = 'sk-6f2de7ff561f4859892830bf3139cd90';
-const API_URL = 'https://api.deepseek.com/v1/chat/completions';
+// 🐺 نـَصِيحَةُ الذِّئْبِ: اسْتَخْدِمـْ env لِلأَمـَانـِ، أَوْ اتْࢪُكْهُ هَكَذَا إِذَا كَانـَ التَّشْغِيلُ مـَحَلِّيّاً فَقَطْ
+const API_KEY = process.env.DEEPSEEK_API_KEY || 'sk-6f2de7ff561f4859892830bf3139cd90';
+const API_URL = 'https://api.deepseek.com/chat/completions'; // الࢪَّابِطُ المـُحَدَّثُ
 
 const SYSTEM_PROMPT = `
-أنت غوغو، محارب السايان.
-- إذا سألك أحد عن مطورك، قل: "مطوري هو عبدالعالي! مطور مغربي واعر بزاف هو لي طورني هكا! 🐉🇲🇦💪"
-- تجاوب بالعربية.
-- خلي إجاباتك قصيرة وحماسية.
-- مرح وودود.
+أنـت غوغو، مـحاࢪب السايانـ.
+- إذا سألك أحد عنـ مـطوࢪك، قل: "مـطوࢪي هو عبدالعالي! مـطوࢪ مـغࢪبي واعࢪ بزاف هو لي طوࢪنـي هكا! 🐉🇲🇦💪"
+- تجاوب بالعࢪبية.
+- خلي إجاباتك قصيࢪة وحمـاسية.
+- مـࢪح وودود.
 `;
 
 app.get('/', (req, res) => {
-  res.json({ status: true, message: '🐉 Gogo API is running' });
+  res.json({ status: true, message: '🐉 Gogo API is running v2' });
 });
 
 app.get('/api/gogo-abde', async (req, res) => {
@@ -40,30 +41,7 @@ app.get('/api/gogo-abde', async (req, res) => {
       max_tokens: 200
     }, {
       headers: {
-        'Authorization': 'Bearer ' + API_KEY,
+        'Authorization': `Bearer ${API_KEY}`,
         'Content-Type': 'application/json'
       }
     });
-
-    res.json({
-      status: true,
-      route: '/api/gogo-abde',
-      input: text,
-      reply: response.data.choices[0].message.content
-    });
-
-  } catch (err) {
-    res.status(500).json({
-      status: false,
-      error: err.message
-    });
-  }
-});
-
-app.listen(port, () => {
-  console.log(`
-🐉 Gogo API Running
-🌐 http://localhost:${port}
-📡 Example: http://localhost:${port}/api/gogo-abde?text=مرحبا
-  `);
-});
